@@ -55,7 +55,7 @@ for language in languages:
         os.makedirs(language, exist_ok=True)
         f = open(os.path.join(language, template), "wb")
         try:
-          f.write(s.encode("utf-8"))
-          f.write(b"\n")
+            f.write(s.encode("utf-8"))
+            f.write(b"\n")
         finally:
-          f.close()
+            f.close()
