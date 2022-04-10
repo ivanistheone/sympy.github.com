@@ -1,0 +1,61 @@
+name: deploy-gh-pages
+
+on:
+  # Trigger the workflow on push to main branch
+  push:
+    branches:
+      - ghactiontest
+  pull_request:
+    branches: sources
+
+# This job installs dependencies, build the book, and pushes it to `gh-pages`
+jobs:
+  build-and-deploy-book:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+        python-version: [3.9]
+    steps:
+
+    # Checkout with submodules
+    - uses: actions/checkout@v2
+      with:
+        submodules: true
+
+    # Setup Python
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v1
+      with:
+        python-version: ${{ matrix.python-version }}
+
+    # Install Python requirements
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    # Build the docs
+    - name: Build the docs
+      run: |
+        ./generate
+
+    # Force-add and commit language dirs and un-submodule static/
+    # via https://stackoverflow.com/a/1789374/127114
+    - name: Add and commit
+      run: |
+        git add -f cs de en es fr nl pt ru zh
+        git rm --cached static
+        git rm .gitmodules
+        rm -rf static/.git
+        git add -f static
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "docs build"
+
+    # Push to the gh-pages branch
+    - name: Push changes
+      uses: ad-m/github-push-action@master
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        branch: gh-pages
+        force: true
