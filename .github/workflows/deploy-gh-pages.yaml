@@ -42,9 +42,8 @@ jobs:
     - name: Add and commit
       run: |
         git add -f cs de en es fr nl pt ru zh
-        git rm --cached static
+        git rm static
         git rm .gitmodules
-        rm -rf static
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "docs build 1"
@@ -53,6 +52,7 @@ jobs:
         cd static
         git checkout origin/fix-mobile-menu
         cd ..
+        rm -rf static/.git
         git add -f static
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
