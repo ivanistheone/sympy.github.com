@@ -43,7 +43,7 @@ jobs:
       run: |
         git add -f cs de en es fr nl pt ru zh
         git rm -f static
-        git rm .gitmodules
+        git rm -f .gitmodules
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git commit -m "docs build 1"
