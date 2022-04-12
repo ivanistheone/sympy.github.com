@@ -45,7 +45,7 @@ jobs:
         git rm --cached static
         git rm .gitmodules
         rm -rf static
-        git clone git@github.com:ivanistheone/sympy-web-static.git static
+        git clone https://github.com/ivanistheone/sympy-web-static.git static
         cd static
         git checkout origin fix-mobile-menu
         cd ..
