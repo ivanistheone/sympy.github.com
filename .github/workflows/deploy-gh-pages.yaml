@@ -4,9 +4,7 @@ on:
   # Trigger the workflow on push to main branch
   push:
     branches:
-      - ghactiontest
-  pull_request:
-    branches: sources
+      - test-new-static
 
 # This job installs dependencies, build the book, and pushes it to `gh-pages`
 jobs:
@@ -46,7 +44,11 @@ jobs:
         git add -f cs de en es fr nl pt ru zh
         git rm --cached static
         git rm .gitmodules
-        rm -rf static/.git
+        rm -rf static
+        git clone git@github.com:ivanistheone/sympy-web-static.git static
+        cd static
+        git checkout origin fix-mobile-menu
+        cd ..
         git add -f static
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
