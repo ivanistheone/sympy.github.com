@@ -45,6 +45,10 @@ jobs:
         git rm --cached static
         git rm .gitmodules
         rm -rf static
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -m "docs build 1"
+        echo "Done with removing old static/"
         git clone https://github.com/ivanistheone/sympy-web-static.git static
         cd static
         git checkout origin/fix-mobile-menu
@@ -52,7 +56,7 @@ jobs:
         git add -f static
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -m "docs build"
+        git commit -m "docs build 2"
 
     # Push to the gh-pages branch
     - name: Push changes
