@@ -1,3 +1,4 @@
 [submodule "static"]
 	path = static
 	url = https://github.com/sympy/sympy-web-static.git
+	url = mfix-mobile-menu
