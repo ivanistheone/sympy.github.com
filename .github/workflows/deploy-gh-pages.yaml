@@ -47,7 +47,7 @@ jobs:
         rm -rf static
         git clone https://github.com/ivanistheone/sympy-web-static.git static
         cd static
-        git checkout origin fix-mobile-menu
+        git checkout origin/fix-mobile-menu
         cd ..
         git add -f static
         git config --local user.email "action@github.com"
