@@ -4,7 +4,7 @@ on:
   # Trigger the workflow on push to main branch
   push:
     branches:
-      - ghactiontest
+      - deploy-jupyterlite-shell-prime
   pull_request:
     branches: sources
 
@@ -19,9 +19,10 @@ jobs:
     steps:
 
     # Checkout with submodules
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
       with:
         submodules: true
+        fetch-depth: 0
 
     # Setup Python
     - name: Set up Python ${{ matrix.python-version }}
